@@ -38,7 +38,7 @@ public class TranServer {
 		}
 		catch (IOException e)
 		{
-			System.out.println("An exception occured");
+			System.out.println("An exception occurred");
 			e.printStackTrace();
 		}
 	}

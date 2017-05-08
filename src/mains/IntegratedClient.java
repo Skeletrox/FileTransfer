@@ -20,10 +20,13 @@ public class IntegratedClient {
 		fileName = sc.next();
 		enc.setInFileName(fileName);
 		enc.setOutFileName(outFile);
-		enc.transmit();
+		enc.encode();
 		try
 		{
-			tc.setFile(outFile);
+			Compressor comp = new Compressor();
+			comp.compress(new File(outFile));
+			String zippedFile = outFile.concat(".zip");
+			tc.setFile(zippedFile);
 			tc.setServerIP(serverIP);
 			tc.setServerPort(port);
 			tc.makeConnection();

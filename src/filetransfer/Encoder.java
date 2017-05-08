@@ -70,7 +70,7 @@ public class Encoder {
 		}
 	}
 	
-	public void transmit()
+	public void encode()
 	{
 		int i = 0;
 		try
@@ -95,10 +95,10 @@ public class Encoder {
 				}
 				fos.write(buffer, 0, i);
 				fos.flush();
-				if (shouldBreak)
-				{
-					break;
-				}
+				if (shouldBreak) {
+                    break;
+                }
+
 			}
 			System.out.println("Encoding done");
 			outFile.close();

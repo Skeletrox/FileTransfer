@@ -1,5 +1,9 @@
 package mains;
 import filetransfer.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class IntegratedServer {
@@ -19,10 +23,17 @@ public class IntegratedServer {
 		ts.makeConnection();
 		ts.getData();
 		ts.getClientIP();
+		Decompressor dc = new Decompressor();
+		try {
+            dc.decompress(new File(fileName));
+        }
+        catch (IOException io) {
+            System.out.println ("Error! Insufficient permissions?");
+        }
 		Encoder enc = new Encoder();
-		enc.setInFileName(fileName);
+		enc.setInFileName("OUTPUT");
 		enc.setOutFileName(outFile);
-		enc.transmit();
+		enc.encode();
 		sc.close();
 	}
 

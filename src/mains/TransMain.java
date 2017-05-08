@@ -18,7 +18,7 @@ public class TransMain
 		outName = sc.next();
 		enc.setInFileName(inName);
 		enc.setOutFileName(outName);
-		enc.transmit();
+		enc.encode();
 		sc.close();
 	}
 }
