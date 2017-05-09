@@ -31,6 +31,8 @@ public class IntegratedClient {
 			tc.setServerPort(port);
 			tc.makeConnection();
 			tc.sendData();
+			new File(outFile).delete();
+			new File(outFile.concat(".zip")).delete();
 		}
 		catch (Exception e)
 		{

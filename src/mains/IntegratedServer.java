@@ -33,6 +33,8 @@ public class IntegratedServer {
 		Encoder enc = new Encoder();
 		enc.setInFileName("OUTPUT");
 		enc.setOutFileName(outFile);
+		new File(fileName).delete();
+		new File("OUTPUT").delete();
 		enc.encode();
 		sc.close();
 	}
