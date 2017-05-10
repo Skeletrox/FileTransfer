@@ -8,7 +8,7 @@ public class MainGUI {
 	JFrame frame1;
 	public void letsRoll() {
 		frame1 = new JFrame("VASScrypt");
-		JButton buttonS = new JButton("Send");
+		JButton buttonS = new JButton("Send");		//buttonS - Send button in frame1
 		buttonS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame2 = new JFrame("Send");			//Sender frame. Because, dialog box doesn't provide much facility
@@ -70,7 +70,7 @@ public class MainGUI {
 				frame2.setVisible(true);
 			}
 		});
-		JButton buttonR = new JButton("Receive");
+		JButton buttonR = new JButton("Receive");	//buttonR - Receive button in frame1
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		FlowLayout fLayout = new FlowLayout(FlowLayout.CENTER, 0, 200);
 	    frame1.setLayout(fLayout);
