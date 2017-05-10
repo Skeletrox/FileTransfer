@@ -1,5 +1,5 @@
 package filetransfer;
-import passgens.RC4Gen;
+import passgens.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ public class Encoder {
 	String inName, outName;
 	FileOutputStream fos;
 	RC4Gen genPass;
-	String outKey;
+	String outKey, outKey2;
 	
 	//Getters and Setters
 	
@@ -34,21 +34,35 @@ public class Encoder {
 		System.out.print("Enter password to encode/decode: ");
 		genPass.setKey(passScan.nextLine());
 		System.out.print("Enter length of output key: ");
-		genPass.setOPLength(passScan.nextInt());
-		genPass.scheduleKey();
-		genPass.generatePseudoRandom(false);
-		outKey = genPass.getOutput();		
-	}
-
-	public Encoder(String password, int length)
-	{
-        genPass = new RC4Gen();
-		genPass.setKey(password);
-		genPass.setOPLength(length);
+		int i = passScan.nextInt();
+        genPass.setOPLength(i);
 		genPass.scheduleKey();
 		genPass.generatePseudoRandom(false);
 		outKey = genPass.getOutput();
+        SalsaGen salsaPass = new SalsaGen();
+        salsaPass.setLength(i);
+        salsaPass.setUserKey(outKey);
+        salsaPass.generateSalsa();
+        outKey2 = salsaPass.getOutput();
+        System.out.println(outKey2);
+        System.out.println(outKey);
 	}
+
+	public Encoder(String password, int length) {
+        genPass = new RC4Gen();
+        genPass.setKey(password);
+        genPass.setOPLength(length);
+        genPass.scheduleKey();
+        genPass.generatePseudoRandom(false);
+        outKey = genPass.getOutput();
+        SalsaGen salsaPass = new SalsaGen();
+        salsaPass.setLength(length);
+        salsaPass.setUserKey(outKey);
+        salsaPass.generateSalsa();
+        outKey2 = salsaPass.getOutput();
+        System.out.println(outKey2);
+        System.out.println(outKey);
+    }
 	
 	public void finalize()
 	{
@@ -98,6 +112,7 @@ public class Encoder {
 					{
 						buffer[i] = di.readByte();
 						buffer[i] ^= outKey.charAt(i%outKey.length());
+						buffer[i] ^= outKey2.charAt(i%outKey.length());
 					}
 					catch (EOFException e)
 					{
