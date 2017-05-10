@@ -5,15 +5,19 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.*;
 import filetransfer.TranClient;
+import mains.IntegratedClient;
+
 
 public class MainGUI {
-	JFrame frame1;
+
+	JFrame frame1, frame2;
+	JLabel percentLabel;
 	public void letsRoll() {
-		frame1 = new JFrame("VASScrypt");
+		frame1 = new JFrame("VASSCrypt");
 		JButton buttonS = new JButton("Send");		//buttonS - Send button in frame1
 		buttonS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame frame2 = new JFrame("Send");			//Sender frame. Because, dialog box doesn't provide much facility
+				frame2 = new JFrame("Send");			//Sender frame. Because, dialog box doesn't provide much facility
 				FlowLayout fLayout = new FlowLayout(FlowLayout.LEFT, 5, 30);
 				frame2.setLayout(fLayout);
 				JLabel fileExtLabel = new JLabel("Select a File");
@@ -28,6 +32,7 @@ public class MainGUI {
 				JLabel portLabel = new JLabel("Enter the Port");
 				JTextField portText = new JTextField(5);
 				JButton button2 = new JButton("Send");
+				percentLabel = new JLabel("0");
 				/* The details of the objects used
 				 * frame 2 - It is the object for 2nd frame which starts upon clicking the "Send" button in frame1
 				 * fileExtLabel - For writing the Label field "Select a File"
@@ -67,30 +72,30 @@ public class MainGUI {
 				frame2.add(portLabel);
 				frame2.add(portText);
 				frame2.add(button2);
-				
+				frame2.add(percentLabel);
 				frame2.setSize(500, 280);
 				frame2.setVisible(true);
 				button2.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent sendAction) {
-						TranClient tC = new TranClient();
-						tC.setServerIP(destText.getText());
-						tC.setServerPort(Integer.parseInt(portText.getText()));
-						try {
-							tC.setFile(fileExt.getText());
-						}
-						catch(FileNotFoundException fnfe) {
-							
-						}
-						try {
-							tC.sendData();
-						}
-						catch(IOException io) {
-							
-						}
-						JProgressBar progressBar;
-						progressBar = new JProgressBar(0, tC.di.getLengthOfTask());
-						progressBar.setValue(0);
-						progressBar.setStringPainted(true);
+					    String[] data = {fileExt.getText(), passwText.getText(), passlText.getText(), destText.getText(), portText.getText()};
+                        try
+                        {
+                            sendFileThroughClient(data);
+                            return;
+                        }
+                        catch (IOException i)
+                        {
+                            i.printStackTrace();
+                        }
+						/*
+						Thread t = new Thread(new SendRunner(tC));
+						Thread t2 = new Thread(new PercentRunner(tC));
+						t.start();
+						t2.start();
+						*/
+
+
+
 					}
 				});
 				
@@ -105,6 +110,13 @@ public class MainGUI {
 		frame1.setSize(500, 500);
 		frame1.setVisible(true);
 	}
+
+	void sendFileThroughClient(String[] s) throws IOException
+    {
+       IntegratedClient.main(s);
+        JOptionPane.showMessageDialog(frame2,
+                "File sent successfully!");
+    }
 	public static void main(String[] args) {
 		MainGUI gui = new MainGUI();
 		gui.letsRoll();

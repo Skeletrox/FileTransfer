@@ -11,6 +11,7 @@ public class TranClient {
 	FileInputStream in;
 	OutputStream out;
 	DataInputStream di;
+	float percentDone = 0.0f;
 	
 	//getters and setters
 	
@@ -36,13 +37,17 @@ public class TranClient {
 		socket = new Socket(serverIP, serverPort);
 		System.out.println("Establishing connection to server...");
 	}
-	
+
+	public float getBytesSent()
+	{
+		return percentDone;
+	}
 	public void sendData() throws IOException
 	{
 		out = socket.getOutputStream();
 		
 		di = new DataInputStream(new BufferedInputStream(new FileInputStream(inFileF)));
-		int i = 0;
+		int i = 0, totSent = 0;
 		while (true)
 		{
 			byte[] buffer = new byte[8192];
@@ -62,6 +67,8 @@ public class TranClient {
 			}
 			out.write(buffer, 0, i);
 			out.flush();
+			totSent += i;
+			percentDone = (float) totSent / (float) inFileF.length();
 			if (shouldBreak)
 			{
 				break;
@@ -89,7 +96,8 @@ public class TranClient {
 			out.write(buffer, 0, buffer.length);
 		}
 		*
-		*/	
+		*/
+		socket.close();
 	}
 	
 	public void finalize()

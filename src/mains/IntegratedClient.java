@@ -7,17 +7,16 @@ public class IntegratedClient {
 	
 	public static void main (String[] args)
 	{
-		Encoder enc = new Encoder();
+		Encoder enc = new Encoder(args[1], Integer.parseInt(args[2]));
 		TranClient tc = new TranClient();
 		String serverIP, fileName, outFile = "OUTFILE";
 		int port;
-		Scanner sc = new Scanner(System.in);
+		fileName = args[0];
+		serverIP = args[3];
+		port = Integer.parseInt(args[4]);
 		System.out.println("Enter IP of Server");
-		serverIP = sc.next();
 		System.out.println("Enter port to send data");
-		port = sc.nextInt();
 		System.out.println("Enter file name to encode");
-		fileName = sc.next();
 		enc.setInFileName(fileName);
 		enc.setOutFileName(outFile);
 		enc.encode();
@@ -25,20 +24,21 @@ public class IntegratedClient {
 		{
 			Compressor comp = new Compressor();
 			comp.compress(new File(outFile));
-			String zippedFile = outFile.concat(".zip");
+			String zippedFile = "OUT.zip";
 			tc.setFile(zippedFile);
 			tc.setServerIP(serverIP);
 			tc.setServerPort(port);
 			tc.makeConnection();
 			tc.sendData();
 			new File(outFile).delete();
-			new File(outFile.concat(".zip")).delete();
+			new File(zippedFile).delete();
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
-		sc.close();
+		System.out.println ("Backend transmission done at IntegratedClient");
+		return;
 	}
 
 }

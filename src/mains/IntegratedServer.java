@@ -22,7 +22,7 @@ public class IntegratedServer {
 		ts.setOutFile(fileName);
 		ts.makeConnection();
 		ts.getData();
-		ts.getClientIP();
+	//	ts.getClientIP();
 		Decompressor dc = new Decompressor();
 		try {
             dc.decompress(new File(fileName));

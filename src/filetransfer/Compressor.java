@@ -16,7 +16,7 @@ import java.util.zip.ZipOutputStream;
 public class Compressor {
     public void compress(File f) throws IOException
     {
-        String fileName =  f.getName().concat(".zip");
+        String fileName =  "OUT.zip";
         FileOutputStream fos = new FileOutputStream(fileName);
         ZipOutputStream zos = new ZipOutputStream(fos);
         zos.putNextEntry(new ZipEntry(f.getName()));

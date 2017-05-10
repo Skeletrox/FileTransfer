@@ -39,10 +39,23 @@ public class Encoder {
 		genPass.generatePseudoRandom(false);
 		outKey = genPass.getOutput();		
 	}
+
+	public Encoder(String password, int length)
+	{
+        genPass = new RC4Gen();
+		genPass.setKey(password);
+		genPass.setOPLength(length);
+		genPass.scheduleKey();
+		genPass.generatePseudoRandom(false);
+		outKey = genPass.getOutput();
+	}
 	
 	public void finalize()
 	{
-		passScan.close();
+		if (passScan != null)
+		{
+			passScan.close();
+		}
 	}
 	
 	private void setInFile()
