@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e1d4fee0-cedb-4560-a1af-bd0895d3a89f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/filetransfer/Compressor.java" afterPath="$PROJECT_DIR$/src/filetransfer/Compressor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/filetransfer/Encoder.java" afterPath="$PROJECT_DIR$/src/filetransfer/Encoder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/filetransfer/TranClient.java" afterPath="$PROJECT_DIR$/src/filetransfer/TranClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mains/IntegratedClient.java" afterPath="$PROJECT_DIR$/src/mains/IntegratedClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mains/IntegratedServer.java" afterPath="$PROJECT_DIR$/src/mains/IntegratedServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/thefirstone/MainGUI.java" afterPath="$PROJECT_DIR$/src/thefirstone/MainGUI.java" />
-    </list>
+    <list default="true" id="e1d4fee0-cedb-4560-a1af-bd0895d3a89f" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />

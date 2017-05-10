@@ -5,4 +5,4 @@ Currently works on CLI only, needs GUI support and functionality to delete tempr
 
 TODO: 1. Add Salsa20 layer of encryption
       2. Have working GUI
-      3. Compress files
+
