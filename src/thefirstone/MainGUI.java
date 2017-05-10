@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.*;
+import filetransfer.TranClient;
 
 public class MainGUI {
 	JFrame frame1;
@@ -68,6 +70,30 @@ public class MainGUI {
 				
 				frame2.setSize(500, 280);
 				frame2.setVisible(true);
+				button2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent sendAction) {
+						TranClient tC = new TranClient();
+						tC.setServerIP(destText.getText());
+						tC.setServerPort(Integer.parseInt(portText.getText()));
+						try {
+							tC.setFile(fileExt.getText());
+						}
+						catch(FileNotFoundException fnfe) {
+							
+						}
+						try {
+							tC.sendData();
+						}
+						catch(IOException io) {
+							
+						}
+						JProgressBar progressBar;
+						progressBar = new JProgressBar(0, tC.di.getLengthOfTask());
+						progressBar.setValue(0);
+						progressBar.setStringPainted(true);
+					}
+				});
+				
 			}
 		});
 		JButton buttonR = new JButton("Receive");	//buttonR - Receive button in frame1
