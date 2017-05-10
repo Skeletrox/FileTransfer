@@ -19,9 +19,15 @@ public class IntegratedServer {
 		ts.setPort(port);
 		System.out.println("Enter the file name to be stored");
 		outFile = sc.next();
-		ts.setOutFile(fileName);
-		ts.makeConnection();
-		ts.getData();
+		try {
+			ts.setOutFile(fileName);
+			ts.makeConnection();
+			ts.getData();
+		}
+		catch (Exception e)
+		{
+
+		}
 	//	ts.getClientIP();
 		Decompressor dc = new Decompressor();
 		try {

@@ -15,9 +15,15 @@ public class ServerMain {
 		ts.setPort(port);
 		System.out.println("Enter file to save at: ");
 		fileName = sc.next();
-		ts.setOutFile(fileName);
-		ts.makeConnection();
-		ts.getData();
+		try {
+			ts.setOutFile(fileName);
+			ts.makeConnection();
+			ts.getData();
+		}
+		catch (Exception e)
+		{
+
+		}
 		sc.close();
 	}
 

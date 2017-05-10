@@ -29,32 +29,23 @@ public class TranServer {
 		clientIP = IP;
 	}
 	
-	public void setOutFile (String s)
+	public void setOutFile (String s) throws IOException
 	{
-		try
-		{
-			outFile = new FileWriter(s);
-			fos = new FileOutputStream(new File(s));
-		}
-		catch (IOException e)
+
+		outFile = new FileWriter(s);
+		fos = new FileOutputStream(new File(s));
+
+		/*catch (IOException e)
 		{
 			System.out.println("An exception occurred");
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
-	public void makeConnection()
-	{
-		try
-		{
-			socket = new ServerSocket (port);
-			System.out.println("Listening...");
-		}
-		catch (Exception e)
-		{
-			System.out.println("An exception was thrown");
-			e.printStackTrace();
-		}
+	public void makeConnection() throws Exception {
+
+		socket = new ServerSocket(port);
+		System.out.println("Listening...");
 	}
 	
 	public void getClientIP()
@@ -63,13 +54,12 @@ public class TranServer {
 		System.out.println(i);
 	}
 	
-	public void getData()
+	public void getData() throws IOException
 	{
 		Socket sock;
 		byte[] buffer = new byte[8192], IPData;	//8 kB buffer
 		int length;
-		try
-		{
+
 			sock = socket.accept();
 			System.out.println("Accepted connection");
 			while ((length = sock.getInputStream().read(buffer)) > 0)
@@ -102,12 +92,8 @@ public class TranServer {
 				//fos.flush();
 			}
 			System.out.println("Received data");
-		}
-		catch (IOException io)
-		{
-			System.out.println("OMG");
-			io.printStackTrace();
-		}
+
+
 				
 	}
 	

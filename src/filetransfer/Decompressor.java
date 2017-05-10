@@ -18,6 +18,10 @@ public class Decompressor {
         ZipEntry ze = zis.getNextEntry();
         while (ze != null){
             File newFile = new File("OUTPUT");
+            if (!(newFile.exists()))
+            {
+                newFile.createNewFile();
+            }
             FileOutputStream fos  = new FileOutputStream(newFile);
 
             int len;
